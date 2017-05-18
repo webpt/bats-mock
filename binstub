@@ -71,9 +71,9 @@ while IFS= read -r line; do
       status="$?"
       set -e
     else
-      #echo "Unexpected call to $program: Call $index arguments don't match." >&2
-      #echo "Expected: ${patterns[*]}" >&2
-      #echo "Actual  : ${arguments[*]}" >&2
+      echo "Unexpected call to $program: Call $index arguments don't match." >&2
+      echo "Expected: ${patterns[*]}" >&2
+      echo "Actual  : ${arguments[*]}" >&2
       eval "${_STUB_RESULT}"=1
       status=1
     fi
@@ -99,7 +99,7 @@ else
   # If the requested index is larger than the number
   # of lines in the plan file, we failed.
   if [ "${!_STUB_INDEX}" -gt $index ]; then
-    #echo "$program stub plan failed.  Expected $((index - 1)) calls, saw ${!_STUB_INDEX}" >&2
+    echo "$program stub plan failed.  Expected $((index - 1)) calls, saw ${!_STUB_INDEX}" >&2
     eval "${_STUB_RESULT}"=1
   fi
 

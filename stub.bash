@@ -27,9 +27,13 @@ unstub() {
   export "${prefix}_STUB_END"=1
 
   local STATUS=0
+  #bash -x "$path" || STATUS="$?"
   "$path" || STATUS="$?"
 
   rm -f "$path"
   rm -f "${BATS_MOCK_TMPDIR}/${program}-stub-plan" "${BATS_MOCK_TMPDIR}/${program}-stub-run"
+  if [ $STATUS -ne 0 ]; then
+    fail "unstub $program failed with status $STATUS"
+  fi
   return "$STATUS"
 }
