@@ -10,3 +10,4 @@ Found some bugs...
 * Whitespace in expectations causes arguments to not match.  See dot-files/tests/bin/test_dev-push-all.bats; ssh stub doesn't work, perhaps args args are too complex?
 * No ability to mock out an executable and expect it NOT to be called.  A-la gtest's `.Times(0)` or similar.  Intuatively, `stub prog.exe` without any expectation arguments should do that.  More generally, how about the ability to match an expectation multiple times?
 * Wildcard argument expectations.  Actually this works?  Add tests for it and add it to the documentation either way.
+* Fall back execution.  On non-matching call to mocked process, fall back to calling underlying executable.
