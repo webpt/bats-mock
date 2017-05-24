@@ -5,7 +5,7 @@ load "bats-assert/all"
 
 function setup()
 {
-	declare -g WD="$(mktemp -d --tmpdir="${BATS_TMPDIR}")"
+	export WD="$(mktemp -d --tmpdir="${BATS_TMPDIR}")"
 }
 
 function teardown()

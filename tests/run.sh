@@ -7,4 +7,5 @@ if [ ! -d "${HERE}/bats" ] || [ ! -d "${HERE}/bats-support" ] || [ ! -d "${HERE}
 	${HERE}/install.sh
 fi
 
+export PATH="$(cd "${HERE}/bats/libexec" && pwd -P):$PATH"
 ${HERE}/bats/bin/bats -t "${HERE}"
