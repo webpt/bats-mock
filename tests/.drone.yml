@@ -1,0 +1,13 @@
+pipeline:
+  test:
+    image: $$IMAGE
+    commands:
+      - ./install.sh
+      - ./run.sh
+
+matrix:
+    include:
+        - IMAGE: ubuntu:17.04
+        - IMAGE: ubuntu:16.10
+        - IMAGE: centos:7
+        - IMAGE: centos:6
