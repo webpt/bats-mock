@@ -7,4 +7,4 @@ if [ ! -d "${HERE}/bats" ] || [ ! -d "${HERE}/bats-support" ] || [ ! -d "${HERE}
 	${HERE}/install.sh
 fi
 
-bats -t "${HERE}"
+${HERE}/bats/bin/bats -t "${HERE}"
