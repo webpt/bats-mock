@@ -24,12 +24,10 @@ unstub() {
   local prefix="_$(echo -n "$program" | tr -cs [:alnum:] _ | tr [:lower:] [:upper:])"
   local path="${BATS_MOCK_BINDIR}/${program}"
 
-  set -x
   export "${prefix}_STUB_END"=1
 
   local STATUS=0
-  bash -x "$path" || STATUS="$?"
-  #"$path" || STATUS="$?"
+  "$path" || STATUS="$?"
 
   rm -f "$path"
   rm -f "${BATS_MOCK_TMPDIR}/${program}-stub-plan" "${BATS_MOCK_TMPDIR}/${program}-stub-run"
