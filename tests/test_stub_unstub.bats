@@ -42,6 +42,7 @@ function _stub_env()
 	program_name="exe"
 	run stub "${program_name}"
 	assert_success
+	assert_output ""
 	assert test -d "${WD}/bin"
 	assert test -L "${WD}/bin/${program_name}"
 	assert_equal "$(cd "${BATS_TEST_DIRNAME}/../src" && pwd -P)/binstub" "$(readlink -f "${WD}/bin/${program_name}")"
@@ -51,6 +52,7 @@ function _stub_env()
 	program_name="exe"
 	run stub "${program_name}" "arg1 arg2" "args : run this"
 	assert_success
+	assert_output ""
 	assert test -f "${WD}/${program_name}-stub-plan"
 	run cat "${WD}/${program_name}-stub-plan"
 	assert_equal "arg1 arg2" "${lines[0]}"
@@ -66,6 +68,7 @@ function _stub_env()
 	export _PROGRAM_STUB_INDEX=1
 	run unstub "program"
 	assert_success
+	assert_output ""
 	assert [ ! -f "${BATS_MOCK_BINDIR}/program" ]
 	assert [ ! -f "${BATS_MOCK_TMPDIR}/program-stub-plan" ]
 	assert [ ! -f "${BATS_MOCK_TMPDIR}/program-stub-run" ]
