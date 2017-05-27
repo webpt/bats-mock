@@ -1,8 +1,5 @@
 Found some bugs...
 
-* Fixes in binsub, see commit.
-* Tests (because I had to make fixes.)
-* Follow the bats plugin guidelines set out by [bats-docs](https://github.com/ztombol/bats-docs)
 * Clean-up.  If a test fails or is killed or unstub is not call for some reason, plan and run files persist and are picked up/added to next time, causing spurious failures.
 * `unstub` (and maybe `stub`) don't work when called from setup/teardown.
 * Error reporting.  Stubbing can cause a test to fail in several places, the default error report is not particularly useful.  We can't echo errors at the time they occur because we might be inside a bats `run()` call.  Therefore we should save error reports and print them as part of the unstub.
