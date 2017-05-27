@@ -23,13 +23,19 @@ function _stub_env()
 	return $rv
 }
 @test "stub sets up environment" {
-	program_name="program.name-with_character1"
-	expected_prefix="PROGRAM_NAME_WITH_CHARACTER1"
-	run _stub_env "${program_name}"
-	assert_success
-	assert_equal "${expected_prefix}_STUB_END=" "${lines[0]}"
-	assert_equal "${expected_prefix}_STUB_PLAN=${WD}/${program_name}-stub-plan" "${lines[1]}"
-	assert_equal "${expected_prefix}_STUB_RUN=${WD}/${program_name}-stub-run" "${lines[2]}"
+	for t in "program.name _PROGRAM_NAME" \
+			 "1name _1NAME" \
+			 "funny-characters _FUNNY_CHARACTERS" \
+			 "repeated.-characters _REPEATED_CHARACTERS"; do
+		set -- $t
+		program_name="$1"
+		expected_prefix="$2"
+		run _stub_env "${program_name}"
+		assert_success
+		assert_equal "${expected_prefix}_STUB_END=" "${lines[0]}"
+		assert_equal "${expected_prefix}_STUB_PLAN=${WD}/${program_name}-stub-plan" "${lines[1]}"
+		assert_equal "${expected_prefix}_STUB_RUN=${WD}/${program_name}-stub-run" "${lines[2]}"
+	done
 }
 
 @test "stub links to binstub" {
