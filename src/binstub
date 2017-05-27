@@ -3,14 +3,14 @@ set -e
 
 status=0
 program="${0##*/}"
-PROGRAM="$(echo "$program" | tr a-z-. A-Z__)"
+prefix="_$(echo -n "$program" | tr -cs [:alnum:] _ | tr [:lower:] [:upper:])"
 
-_STUB_PLAN="${PROGRAM}_STUB_PLAN"
-_STUB_RUN="${PROGRAM}_STUB_RUN"
-_STUB_INDEX="${PROGRAM}_STUB_INDEX"
-_STUB_RESULT="${PROGRAM}_STUB_RESULT"
-_STUB_END="${PROGRAM}_STUB_END"
-_STUB_DEBUG="${PROGRAM}_STUB_DEBUG"
+_STUB_PLAN="${prefix}_STUB_PLAN"
+_STUB_RUN="${prefix}_STUB_RUN"
+_STUB_INDEX="${prefix}_STUB_INDEX"
+_STUB_RESULT="${prefix}_STUB_RESULT"
+_STUB_END="${prefix}_STUB_END"
+_STUB_DEBUG="${prefix}_STUB_DEBUG"
 
 if [ -n "${!_STUB_DEBUG}" ]; then
   echo "$program" "$@" >&${!_STUB_DEBUG}

@@ -61,9 +61,9 @@ function _stub_env()
 	mkdir --parents "${WD}/bin"
 	ln -s "${BATS_TEST_DIRNAME}/../src/binstub" "${WD}/bin/program"
 	touch "${WD}/program-stub-plan" "${WD}/program-stub-run"
-	export PROGRAM_STUB_PLAN="${WD}/program-stub-plan"
-	export PROGRAM_STUB_RUN="${WD}/program-stub-run"
-	export PROGRAM_STUB_INDEX=1
+	export _PROGRAM_STUB_PLAN="${WD}/program-stub-plan"
+	export _PROGRAM_STUB_RUN="${WD}/program-stub-run"
+	export _PROGRAM_STUB_INDEX=1
 	run unstub "program"
 	assert_success
 	assert [ ! -f "${BATS_MOCK_BINDIR}/program" ]
