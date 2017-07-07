@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 BATS_MOCK_TMPDIR="${BATS_TMPDIR}"
 BATS_MOCK_BINDIR="${BATS_MOCK_TMPDIR}/bin"
 
@@ -5,10 +6,13 @@ PATH="$BATS_MOCK_BINDIR:$PATH"
 
 stub() {
   local program="$1"
-  local prefix="_$(echo -n "$program" | tr -cs [:alnum:] _ | tr [:lower:] [:upper:])"
+  local prefix
+  prefix="_$(echo -n "$program" | tr -cs '[:alnum:]' _ | tr '[:lower:]' '[:upper:]')"
   shift
 
+  # shellcheck disable=SC2140
   export "${prefix}_STUB_PLAN"="${BATS_MOCK_TMPDIR}/${program}-stub-plan"
+  # shellcheck disable=SC2140
   export "${prefix}_STUB_RUN"="${BATS_MOCK_TMPDIR}/${program}-stub-run"
   export "${prefix}_STUB_END"=
 
@@ -21,7 +25,8 @@ stub() {
 
 unstub() {
   local program="$1"
-  local prefix="_$(echo -n "$program" | tr -cs [:alnum:] _ | tr [:lower:] [:upper:])"
+  local prefix
+  prefix="_$(echo -n "$program" | tr -cs '[:alnum:]' _ | tr '[:lower:]' '[:upper:]')"
   local path="${BATS_MOCK_BINDIR}/${program}"
 
   export "${prefix}_STUB_END"=1
