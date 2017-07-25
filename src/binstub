@@ -59,7 +59,10 @@ while IFS= read -r line; do
 
       case "$argument" in
         $pattern ) ;;
-        * ) result=1 ;;
+        * )
+          result=1
+          echo "Argument mismatch for call $index to $program: '${pattern}' != '${argument}'" >&2
+          ;;
       esac
     done
 
