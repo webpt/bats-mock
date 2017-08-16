@@ -10,7 +10,7 @@ stub() {
   prefix="_$(echo -n "$program" | tr -cs '[:alnum:]' _ | tr '[:lower:]' '[:upper:]')"
   shift
   local tmpdir="${BATS_MOCK_TMPDIR}/${BATS_TEST_NAME}"
-  mkdir --parents "${tmpdir}"
+  mkdir -p "${tmpdir}"
 
   # shellcheck disable=SC2140
   export "${prefix}_STUB_PLAN"="${tmpdir}/${program}-stub-plan"
@@ -39,8 +39,8 @@ unstub() {
 
   rm -f "$path"
   rm -f "${tmpdir}/${program}-stub-plan" "${tmpdir}/${program}-stub-run"
-  rmdir --parents "${BATS_MOCK_BINDIR}" 2>/dev/null || true
-  rmdir --parents "${tmpdir}" 2>/dev/null || true
+  rmdir -p "${BATS_MOCK_BINDIR}" 2>/dev/null || true
+  rmdir -p "${tmpdir}" 2>/dev/null || true
   if [ $STATUS -ne 0 ]; then
     fail "unstub $program failed with status $STATUS"
   fi
